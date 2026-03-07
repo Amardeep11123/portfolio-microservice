@@ -11,7 +11,9 @@ FASTAPI_URL = "http://fastapi:8001"
 @api_view(['GET'])
 def process_event(request, event_id):
     try:
-        response = requests.get(f"{FASTAPI_URL}/process/{event_id}")
+        response = requests.get(f"{FASTAPI_URL}/process/{event_id}",
+        timeout=5
+        )
         data = response.json()
 
         # Save to DB
