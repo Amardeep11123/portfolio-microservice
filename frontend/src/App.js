@@ -1,63 +1,94 @@
 import React, { useState } from "react";
+// import "./App.css";
+import "./index.css";
+import profile from "./assets/profile.jpg";
 
 function App() {
-  const [apiResult, setApiResult] = useState(null);
+  const [lang, setLang] = useState("EN");
 
-  const testAPI = async () => {
-    try {
-      const response = await fetch("/api/process/123/");
-      const data = await response.json();
-      setApiResult(JSON.stringify(data, null, 2));
-    } catch (error) {
-      setApiResult("Error calling API");
-    }
+  const content = {
+    EN: {
+      title: "Full Stack Developer | Python | Django | FastAPI | AWS",
+      about:
+        "Experienced software engineer with 13+ years including Japan projects. Specialized in backend architecture, microservices, and cloud deployment.",
+      projects: "Projects",
+      project1: "EdgeAI Event Processing System",
+      projectDesc: "Django + FastAPI + MongoDB + AWS EC2 Deployment",
+      skills: "Skills",
+      resume: "Download Resume",
+      enBtn: "English Resume",
+      jpBtn: "Japanese Resume",
+    },
+    JP: {
+      title: "フルスタックエンジニア | Python | Django | FastAPI | AWS",
+      about:
+        "日本案件を含む13年以上の経験を持つソフトウェアエンジニア。バックエンド設計、マイクロサービス、クラウド構築を専門としています。",
+      projects: "プロジェクト",
+      project1: "EdgeAI イベント処理システム",
+      projectDesc: "Django + FastAPI + MongoDB + AWS EC2 デプロイ",
+      skills: "スキル",
+      resume: "履歴書ダウンロード",
+      enBtn: "英語履歴書",
+      jpBtn: "日本語履歴書",
+    },
   };
 
+  const t = content[lang];
+
   return (
-    <div style={{ fontFamily: "Arial", padding: "40px", maxWidth: "900px", margin: "auto" }}>
-      
-      <h1>Amardip Chimankar</h1>
-      <h3>Backend Engineer | Python | Django | FastAPI | AWS</h3>
-      <hr />
+    <div className="container">
 
-      <h2>About Me</h2>
-      <p>
-        Backend engineer with experience building production-level microservice 
-        architectures using Django, FastAPI, PostgreSQL, Docker and AWS EC2.
-      </p>
+      {/* Language Toggle */}
+      <div className="lang-toggle">
+        <button onClick={() => setLang("EN")}>EN</button>
+        <button onClick={() => setLang("JP")}>JP</button>
+      </div>
 
-      <h2>Skills</h2>
-      <ul>
-        <li>Python</li>
-        <li>Django & Django REST Framework</li>
-        <li>FastAPI</li>
-        <li>PostgreSQL</li>
-        <li>Docker & Docker Compose</li>
-        <li>AWS EC2 Deployment</li>
-        <li>Nginx Reverse Proxy</li>
-        <li>Microservices Architecture</li>
-      </ul>
+      <div className="hero">
+        <div className="hero-text">
+          <h1>Amardip Chimankar</h1>
+          <h3>{t.title}</h3>
+          <p>{t.about}</p>
+        </div>
 
-      <h2>Projects</h2>
-      <ul>
-        <li><strong>Microservice Event Processing System</strong> – Live AWS deployment with Docker and Nginx</li>
-        <li><strong>Edge Telemetry Processing System</strong> – Real-time API gateway architecture</li>
-        <li><strong>PARFA Analytics Tool</strong> – Internal data visualization platform</li>
-      </ul>
+        <div className="hero-image">
+          <img src={profile} alt="Amardip" />
+        </div>
+      </div>
 
-      <h2>Live API Demo</h2>
-      <button onClick={testAPI} style={{ padding: "10px 20px", fontSize: "16px" }}>
-        Test Live API
-      </button>
+      <section>
+        <h2>{t.projects}</h2>
+        <div className="card">
+          <h3>{t.project1}</h3>
+          <p>{t.projectDesc}</p>
+        </div>
+      </section>
 
-      {apiResult && (
-        <pre style={{ background: "#f4f4f4", padding: "15px", marginTop: "20px" }}>
-          {apiResult}
-        </pre>
-      )}
+      <section>
+        <h2>{t.skills}</h2>
+        <div className="skills">
+          <span>Python</span>
+          <span>Django</span>
+          <span>FastAPI</span>
+          <span>React</span>
+          <span>AWS</span>
+          <span>Docker</span>
+          <span>PostgreSQL</span>
+        </div>
+      </section>
 
-      <hr />
-      <p>GitHub: https://github.com/Amardeep11123</p>
+      <section>
+        <h2>{t.resume}</h2>
+        <div className="buttons">
+          <a href="/EN_Amar.pdf" target="_blank" rel="noreferrer">
+            {t.enBtn}
+          </a>
+          <a href="/JA_Amar.pdf" target="_blank" rel="noreferrer">
+            {t.jpBtn}
+          </a>
+        </div>
+      </section>
+
     </div>
   );
 }
